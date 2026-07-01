@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Roadmap - Internship Recommendation System{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2 style="color: #1B4332; text-align: center; margin-bottom: 20px;font-size: 35px;font-weight: 900;">Learning Roadmap</h2>
+
+  <!-- Domain Selector Dropdown -->
+  <div style="background-color: #FEFAE0; padding: 15px; border-radius: 6px; margin-bottom: 30px; display: flex; align-items: center; gap: 15px;">
+    <label for="domainSelect" style="font-weight: bold; color: #1B4332;">Choose Career Domain:</label>
+    <select id="domainSelect" onchange="window.location.href='/roadmap?domain=' + this.value" class="form-control" style="width: auto; flex: 1;">
+      {% for d in all_domains %}
+        <option value="{{ d }}" {% if d == domain %}selected{% endif %}>{{ d }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <!-- Domain info -->
+  <div style="background-color: #1B4332; color: white; padding: 25px; border-radius: 8px; margin-bottom: 30px;">
+    <h2 style="margin: 0 0 10px 0;">{{ roadmap.icon }} {{ domain }}</h2>
+    <p style="margin: 0; opacity: 0.9; line-height: 1.6;">{{ roadmap.description }}</p>
+  </div>
+
+  <!-- Phases -->
+  {% if roadmap.phases %}
+    <div>
+      {% for phase in roadmap.phases %}
+        <div style="border: 1px solid #DDDDDD; border-radius: 8px; overflow: hidden; margin-bottom: 25px; background-color: #FFFFFF;">
+          <!-- Phase Title -->
+          <div style="background-color: #2D6A4F; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0; font-size: 18px;">Phase {{ loop.index }}: {{ phase.title }}</h3>
+            <span style="background-color: rgba(255, 255, 255, 0.2); padding: 4px 10px; border-radius: 4px; font-size: 14px;">⏱️ {{ phase.duration }}</span>
+          </div>
+          <!-- Phase Skills -->
+          <div style="padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            {% for skill in phase.skills %}
+              <div style="background-color: #F8F9FA; padding: 12px; border-radius: 4px; border-left: 4px solid #F4A300;">
+                <strong style="display: block; color: #1B4332; margin-bottom: 4px;">{{ skill.name }}</strong>
+                <span style="font-size: 14px; color: #6C757D;">Resource: {{ skill.resource }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Back button -->
+  <div style="text-align: center; margin-top: 30px; border-top: 1px solid #DDDDDD; padding-top: 20px;">
+    <a href="{{ url_for('assessment') }}" class="btn btn-primary">Take Another Assessment</a>
+  </div>
+
+</div>
+{% endblock %}

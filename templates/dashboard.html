@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Internship Recommendation System{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2 style="color: #1B4332; text-align: center; margin-bottom: 30px;font-size: 35px;font-weight: 900;">Analytics Dashboard</h2>
+
+  <!-- Stats Grid -->
+  <div class="grid-3" style="margin-bottom: 40px;">
+    <div class="stat-box">
+      <h2>{{ total_predictions }}</h2>
+      <p style="color: #6C757D; margin: 5px 0 0 0; font-weight: bold;">Total Assessments</p>
+    </div>
+    <div class="stat-box">
+      <h2 style="font-size: 20px; line-height: 32px;">{{ top_domain }}</h2>
+      <p style="color: #6C757D; margin: 5px 0 0 0; font-weight: bold;">Top Recommended Career</p>
+    </div>
+    <div class="stat-box">
+      <h2>{{ avg_confidence }}%</h2>
+      <p style="color: #6C757D; margin: 5px 0 0 0; font-weight: bold;">Average Confidence</p>
+    </div>
+  </div>
+
+  <!-- Charts Section -->
+  {% if total_predictions > 0 %}
+    <div class="grid-2" style="margin-bottom: 40px;">
+      <!-- Chart 1: Career Distribution -->
+      <div style="border: 1px solid #DDDDDD; padding: 20px; border-radius: 6px; background-color: #FFFFFF;">
+        <h3 style="color: #1B4332; margin-top: 0; text-align: center;">Recommended Careers Spread</h3>
+        <div class="chart-container">
+          <canvas id="careerChart"></canvas>
+        </div>
+      </div>
+      
+      <!-- Chart 2: Readiness Distribution -->
+      <div style="border: 1px solid #DDDDDD; padding: 20px; border-radius: 6px; background-color: #FFFFFF;">
+        <h3 style="color: #1B4332; margin-top: 0; text-align: center;">Readiness Categories</h3>
+        <div class="chart-container">
+          <canvas id="readinessChart"></canvas>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div style="text-align: center; padding: 30px; border: 1px solid #DDDDDD; border-radius: 6px; margin-bottom: 40px;">
+      <p>No assessment records found in the database. Complete the assessment to see system-wide analytics charts here!</p>
+    </div>
+  {% endif %}
+
+  <!-- User profile skill radar / prediction summary -->
+  <div class="grid-2">
+    <!-- Recent predictions list -->
+    <div style="border: 1px solid #DDDDDD; padding: 20px; border-radius: 6px;">
+      <h3 style="color: #1B4332; margin-top: 0;">📋 Your Recent Predictions</h3>
+      {% if recent_predictions %}
+        <table style="font-size: 14px;">
+          <thead>
+            <tr>
+              <th>Recommended Domain</th>
+              <th>Confidence</th>
+              <th>Readiness</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in recent_predictions %}
+              <tr>
+                <td><strong>{{ row.predicted_domain }}</strong></td>
+                <td>{{ row.confidence }}%</td>
+                <td>{{ row.readiness_category }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>No predictions found for your profile. Please take the assessment to get started.</p>
+        <a href="{{ url_for('assessment') }}" class="btn btn-primary" style="margin-top: 10px;">Take Assessment</a>
+      {% endif %}
+    </div>
+
+    <!-- Latest Prediction Skill Radar -->
+    <div style="border: 1px solid #DDDDDD; padding: 20px; border-radius: 6px; background-color: #FFFFFF;">
+      <h3 style="color: #1B4332; margin-top: 0;">🎯 Your Latest Skill Profile</h3>
+      {% if user_prediction %}
+        <div style="background-color: #1B4332; color: white; padding: 12px; border-radius: 4px; margin-bottom: 15px; text-align: center;">
+          Last prediction: <strong>{{ user_prediction.predicted_domain }}</strong>
+        </div>
+        <div class="chart-container">
+          <canvas id="skillsRadar"></canvas>
+        </div>
+      {% else %}
+        <p style="text-align: center; color: #6C757D; padding: 40px 0;">No personal assessment records found. Complete the assessment to view your skill radar chart!</p>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+
+<!-- Hidden script tags carrying JSON data from Flask to Chart.js in JS -->
+<script>
+  var careerData = JSON.parse('{{ domain_counts_json|safe }}');
+  var readinessData = JSON.parse('{{ readiness_counts_json|safe }}');
+  var skillsData = JSON.parse('{{ skills_json|safe }}');
+</script>
+
+{% endblock %}
+
+{% block extra_js %}
+<!-- Add standard Chart.js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

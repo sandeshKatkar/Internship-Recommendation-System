@@ -1,0 +1,280 @@
+/* style.css - Simple styling for Internship Recommendation System */
+
+/* ── Google Font: Poppins ─────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  background-color: #FEFAE0; /* Cream background */
+  color: #1A1A2E;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header & Navigation */
+.navbar {
+  background-color: #1B4332; /* Dark green */
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.3px;
+}
+
+.navbar a {
+  color: #F4A300;
+  text-decoration: none;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+}
+
+.navbar .nav-logo {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.navbar .nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar .nav-links a:hover {
+  color: #F4A300; /* Yellow hover */
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: rgb(255, 252, 252);
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 0px 20px;
+  padding-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: 40px;
+  font-weight: 700;
+  color: #2c6e53;
+  letter-spacing: -0.5px;
+}
+
+.hero h1 span {
+  color: #F4A300;
+  font-weight: 800;
+}
+
+.hero p {
+  font-size: 17px;
+  color: #6C757D;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 10px 22px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.4px;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background-color: #F4A300;
+  color: #1B4332;
+}
+
+.btn-primary:hover {
+  background-color: #E09500;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #1B4332;
+  border: 2px solid #1B4332;
+}
+
+.btn-outline:hover {
+  background-color: #1B4332;
+  color: #FFFFFF;
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #1B4332;
+  letter-spacing: 0.2px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 11px 12px;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  border: 1.5px solid #F4A300;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #2c6e53;
+  box-shadow: 0 0 0 3px rgba(44, 110, 83, 0.15);
+}
+
+/* Grid Layouts */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+/* Cards */
+.card {
+  padding: 20px;
+  border: 1px solid #E9ECEF;
+  border-radius: 6px;
+  /* background-color: #F4A300; */
+  border: 1.5px solid #F4A300;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(40, 63, 36, 0.18);
+}
+
+.card h3 {
+  color: #1B4332;
+  margin-top: 10px;
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, table td {
+  border: 1px solid #DDDDDD;
+  padding: 12px;
+  text-align: left;
+}
+
+table th {
+  background-color: #1B4332;
+  color: white;
+}
+
+/* Prediction Page details */
+.result-header {
+  text-align: center;
+  background-color: #1B4332;
+  color: white;
+  padding: 30px;
+  border-radius: 8px 8px 0 0;
+  margin: -20px -20px 20px -20px;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  background-color: #E9ECEF;
+  border-radius: 10px;
+  height: 20px;
+  margin: 10px 0;
+}
+
+.progress-bar-fill {
+  background-color: #F4A300;
+  height: 100%;
+  border-radius: 10px;
+  width: 0%; /* Will be styled inline */
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 5px 12px;
+  font-weight: bold;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.badge-excellent { background-color: #D8F3DC; color: #1B4332; }
+.badge-good      { background-color: #FFF3CD; color: #856404; }
+.badge-average   { background-color: #CFF4FC; color: #0A58CA; }
+.badge-need      { background-color: #F8D7DA; color: #842029; }
+
+/* Dashboard layout */
+.stat-box {
+  background-color: #FFFFFF;
+  padding: 20px;
+  border: 1px solid #DDDDDD;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: transform 0.2s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-3px);
+}
+
+.stat-box h2 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #1B4332;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.chart-container {
+  height: 250px;
+  margin: 20px 0;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 22px;
+  background-color: #1B4332;
+  color: white;
+  margin-top: 50px;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Register - Internship Recommendation System{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 500px;">
+  <h2 style="color: #1B4332; text-align: center; margin-bottom: 20px;">Create Account</h2>
+  
+  <form method="POST" action="{{ url_for('register') }}">
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" class="form-control" placeholder="Enter your full name" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" class="form-control" placeholder="Enter email address" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" class="form-control" placeholder="Create a password" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="institution">Institution / University</label>
+      <input type="text" id="institution" name="institution" class="form-control" placeholder="e.g. ABC University">
+    </div>
+    
+    <div class="form-group">
+      <label for="year">Year of Study</label>
+      <select id="year" name="year" class="form-control">
+        <option value="1st Year">1st Year</option>
+        <option value="2nd Year">2nd Year</option>
+        <option value="3rd Year">3rd Year</option>
+        <option value="4th Year">4th Year</option>
+        <option value="Graduated">Graduated</option>
+      </select>
+    </div>
+    
+    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Create Account</button>
+  </form>
+  
+  <p style="text-align: center; margin-top: 15px;">
+    Already have an account? <a href="{{ url_for('login') }}" style="color: #1B4332; font-weight: bold;">Log in here</a>
+  </p>
+</div>
+{% endblock %}

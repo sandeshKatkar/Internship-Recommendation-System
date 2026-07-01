@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Internship Recommendation System{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar">
+    <a href="{{ url_for('home') if session.get('user_id') else '#' }}" class="nav-logo">🎓 Yellow Stone</a>
+    <ul class="nav-links">
+      {% if session.get('user_id') %}
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('assessment') }}">Assessment</a></li>
+        <li><a href="{{ url_for('roadmap') }}">Roadmap</a></li>
+        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+        <li><a href="{{ url_for('about') }}">About Us</a></li>
+        <li style="color: #F4A300; font-weight: bold; margin-left: 20px;">Hello, {{ session.get('user_name') }}!</li>
+        <li><a href="{{ url_for('logout') }}" style="color: #F4A300; border: 1px solid #F4A300;padding: 5px 10px;border-radius: 5px;">Logout</a></li>
+      {% else %}
+        <li><a href="{{ url_for('login') }}">Login</a></li>
+        <li><a href="{{ url_for('register') }}">Register</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  <!-- FLASH MESSAGES -->
+  <!-- {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div style="max-width: 900px; margin: 15px auto; padding: 10px; border-radius: 4px; text-align: center;">
+        {% for category, message in messages %}
+          <div style="background-color: {% if category == 'success' %}#D4EDDA{% else %}#F8D7DA{% endif %}; 
+                      color: {% if category == 'success' %}#155724{% else %}#721C24{% endif %}; 
+                      padding: 10px; margin-bottom: 5px; border-radius: 4px;">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %} -->
+
+  <!-- CONTENT -->
+  {% block content %}{% endblock %}
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2024 Internship Recommendation System. Built with Python, Flask & SQLite.</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

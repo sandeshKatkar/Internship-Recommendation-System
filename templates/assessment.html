@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block title %}Assessment - Internship Recommendation System{% endblock %}
+
+{% block content %}
+<div class="container" style="background-color: rgb(255, 252, 252);">
+  <h2 style="color: #1B4332; text-align: center; margin-bottom: 10px;font-size: 35px;font-weight: 900;">Student Assessment Form</h2>
+  <p style="text-align: center; color: #F4A300; margin-bottom: 30px;">Fill out all sections below to get your career recommendation.</p>
+
+  <form method="POST" action="{{ url_for('api_predict') }}">
+    
+    <!-- ═══ SECTION 1: Academic Info ═══ -->
+    <h3 style="color: #1B4332; border-bottom: 2px solid #F4A300; padding-bottom: 8px; margin-bottom: 20px;">🎓 Academic Information</h3>
+    
+    <div class="grid-2">
+      <div class="form-group">
+        <label for="ssc">SSC Percentage (%)</label>
+        <input type="number" id="ssc" name="SSC Percentage" class="form-control" placeholder="e.g. 85.5" min="0" max="100" step="0.1" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="hsc">HSC Percentage (%)</label>
+        <input type="number" id="hsc" name="HSC Percentage" class="form-control" placeholder="e.g. 78.2" min="0" max="100" step="0.1" required>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="form-group">
+        <label for="cgpa">CGPA (out of 10)</label>
+        <input type="number" id="cgpa" name="CGPA" class="form-control" placeholder="e.g. 8.5" min="0" max="10" step="0.01" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number" id="age" name="Age" class="form-control" placeholder="e.g. 21" min="17" max="30" required>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="form-group">
+        <label for="backlogs">Number of Backlogs</label>
+        <input type="number" id="backlogs" name="Backlogs" class="form-control" placeholder="e.g. 0" min="0" max="10" value="0" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="gender">Gender</label>
+        <select id="gender" name="Gender" class="form-control">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ═══ SECTION 2: Technical Skills ═══ -->
+    <h3 style="color: #1B4332; border-bottom: 2px solid #F4A300; padding-bottom: 8px; margin-top: 30px; margin-bottom: 20px;">💻 Technical Skills (Rate 1 to 10)</h3>
+    
+    <div class="grid-2">
+      {% set tech_skills = [
+        ('Python Skill','Python'), ('Java Skill','Java'), ('C++ Skill','C++'),
+        ('JavaScript Skill','JavaScript'), ('SQL Skill','SQL'), ('Data Structures','Data Structures'),
+        ('Algorithms','Algorithms'), ('DBMS','DBMS'), ('Operating System','Operating System'),
+        ('Computer Networks','Computer Networks'), ('Software Engineering','Software Engineering'),
+        ('Machine Learning','Machine Learning'), ('Deep Learning','Deep Learning'), ('Statistics','Statistics'),
+        ('Data Analysis','Data Analysis'), ('Data Visualization','Data Visualization'), ('AWS','AWS'),
+        ('Azure','Azure'), ('Docker','Docker'), ('Kubernetes','Kubernetes'), ('CI/CD','CI/CD')
+      ] %}
+      
+      {% for name, label in tech_skills %}
+        <div class="form-group">
+          <label for="skill-{{ name|replace(' ','_')|replace('+','_') }}">{{ label }}: <span id="val-{{ name|replace(' ','_')|replace('+','_') }}">5</span>/10</label>
+          <input type="range" style="accent-color: #F4A300;" id="skill-{{ name|replace(' ','_')|replace('+','_') }}" name="{{ name }}" min="1" max="10" value="5" class="form-control"
+                 oninput="document.getElementById('val-{{ name|replace(' ','_')|replace('+','_') }}').innerText = this.value">
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- ═══ SECTION 3: Soft Skills ═══ -->
+    <h3 style="color: #1B4332; border-bottom: 2px solid #F4A300; padding-bottom: 8px; margin-top: 30px; margin-bottom: 20px;">🤝 Soft Skills (Rate 1 to 10)</h3>
+    
+    <div class="grid-2">
+      {% set soft_skills = [
+        ('Communication','Communication'), ('Leadership','Leadership'),
+        ('Teamwork','Teamwork'), ('Presentation','Presentation'),
+        ('Problem Solving','Problem Solving')
+      ] %}
+      
+      {% for name, label in soft_skills %}
+        <div class="form-group">
+          <label for="skill-{{ name }}">{{ label }}: <span id="val-{{ name }}">5</span>/10</label>
+          <input type="range" style="accent-color: #F4A300;" id="skill-{{ name }}" name="{{ name }}" min="1" max="10" value="5" class="form-control"
+                 oninput="document.getElementById('val-{{ name }}').innerText = this.value">
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- ═══ SECTION 4: Experience ═══ -->
+    <h3 style="color: #1B4332; border-bottom: 2px solid #F4A300; padding-bottom: 8px; margin-top: 30px; margin-bottom: 20px;">🏆 Projects & Experience</h3>
+    
+    <div class="grid-2">
+      <div class="form-group">
+        <label for="projects">Number of Projects Completed</label>
+        <input type="number" id="projects" name="Number of Projects" class="form-control" placeholder="e.g. 3" min="0" max="20" value="0" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="certs">Certifications Count</label>
+        <input type="number" id="certs" name="Certifications Count" class="form-control" placeholder="e.g. 2" min="0" max="10" value="0" required>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="form-group">
+        <label for="internship">Prior Internship Experience?</label>
+        <select id="internship" name="Internship Experience" class="form-control">
+          <option value="0">No Experience</option>
+          <option value="1">Have Completed an Internship</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="hackathons">Hackathons Participated</label>
+        <input type="number" id="hackathons" name="Hackathon Participation" class="form-control" placeholder="e.g. 1" min="0" max="10" value="0" required>
+      </div>
+    </div>
+
+    <div class="form-group" style="max-width: 50%;">
+      <label for="papers">Research Papers Published</label>
+      <input type="number" id="papers" name="Research Papers" class="form-control" placeholder="e.g. 0" min="0" max="5" value="0" required>
+    </div>
+
+    <!-- SUBMIT BUTTON -->
+    <div style="text-align: center; margin-top: 40px; border-top: 1px solid #DDDDDD; padding-top: 30px;">
+      <button type="submit" class="btn btn-primary" style="padding: 15px 40px; font-size: 18px;">🔮 Get My Recommendation</button>
+    </div>
+
+  </form>
+</div>
+{% endblock %}

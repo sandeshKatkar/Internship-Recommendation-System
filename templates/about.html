@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}About Me - Internship Recommendation System{% endblock %}
+
+{% block content %}
+<div class="container">
+  
+
+  <div class="grid-3" style="grid-template-columns: 400px 1fr 1fr; align-items: start; gap: 30px;">
+    <!-- Profile picture block -->
+     
+    <div style="text-align: center;">
+      <h1 style="color: #256349; text-align: center; margin-bottom: 30px;">About US</h1>
+      <img src="../static/images/about.jfif" alt="" srcset="" style="width:300px">
+    </div>
+
+    <!-- Description -->
+    <div style="grid-column: span 2; margin-top: 30px;">
+      <h3 style="color: #F4A300; margin-top: 0; border-bottom: 2px solid #F4A300; padding-bottom: 8px;">Discover the Right Internship with AI-Powered Recommendations</h3>
+      <p style="line-height: 1.6; color: #343A40;">
+        
+
+          The Smart Internship Recommendation System is an intelligent web application that helps students identify the most suitable internship domain based on their academic performance, technical skills, soft skills, and professional profile. Using Machine Learning, the system analyzes multiple factors to provide personalized internship recommendations, enabling students to make informed career decisions.
+
+          Our goal is to bridge the gap between students' current skill sets and industry requirements by not only recommending the best internship domain but also highlighting areas for improvement through skill gap analysis. Whether you aspire to become a Data Scientist, Cloud Engineer, Software Developer, or Cyber Security Analyst, our system provides data-driven guidance to support your career journey.
+      </p>
+
+      <h3 style="color: #F4A300; margin-top: 30px; border-bottom: 2px solid #F4A300; padding-bottom: 8px;">Our Mission</h3>
+      <p style="line-height: 1.6; color: #343A40;">
+        
+          Our mission is to empower students with intelligent career guidance by leveraging Machine Learning to simplify internship selection and help them build industry-ready skill sets.
+      </p>
+      
+    </div>
+  </div>
+
+</div>
+
+<div class="container">
+  <h2 style="text-align: center; color: #1B4332; margin-bottom: 30px;">About Our System</h2>
+  <div class="grid-2">
+    <div class="card">
+      <div style="font-size: 40px;">📊</div>
+      <h3>Smart Analysis</h3>
+      <p>Advanced ML algorithms analyze your profile and predict the best internship domain.</p>
+    </div>
+    <div class="card">
+      <div style="font-size: 40px;">🎯</div>
+      <h3>Personalized Results</h3>
+      <p>Get domain recommendations that match your skills, interests, and academic background.</p>
+    </div>
+    <div class="card">
+      <div style="font-size: 40px;">📈</div>
+      <h3>Skill Improvement</h3>
+      <p>Identify your weak areas and get skill improvement suggestions with roadmap plans.</p>
+    </div>
+    <div class="card">
+      <div style="font-size: 40px;">🚀</div>
+      <h3>Career Growth</h3>
+      <p>Start your career journey with the right internship in the perfect domain for you.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

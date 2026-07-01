@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Home - Internship Recommendation System{% endblock %}
+
+{% block content %}
+<!-- <div class="container hero">
+  <h1>Find Your Perfect <span>Internship</span></h1>
+  <p>Our Machine Learning based system analyzes your academic performance, technical skills, and interests to recommend the most suitable internship domain for your future.</p>
+  <div style="margin-top: 30px;">
+    <a href="{{ url_for('assessment') }}" class="btn btn-primary" style="margin-right: 15px;">🚀 Get Recommendation</a>
+    <a href="{{ url_for('about') }}" class="btn btn-outline">Learn More</a>
+  </div>
+</div> -->
+
+<div class="container hero" style="min-height:80vh; display:flex; align-items:center; justify-content:space-between; gap:10px;">
+
+    <!-- Left Image -->
+    <div style="flex:1; display:flex; justify-content:center; align-items:center;max-width: 400px;">
+
+        <img src="{{ url_for('static', filename='../static/images/hero.jfif') }}"
+             alt="Student"
+             style="width:100%; max-width:400px;">
+
+    </div>
+
+    <!-- Right Content -->
+    <div style="flex:1;padding-right: 20px;">
+
+        <h1>
+            Find Your Perfect <span>Internship</span>
+        </h1>
+
+        <p>
+            Our Machine Learning based Smart Internship Recommendation System
+            analyzes your academic performance, technical skills,
+            certifications, projects, and professional profile to recommend
+            the most suitable internship domain for your future. Get
+            personalized career guidance, discover your skill gaps, and make
+            informed career decisions with AI-powered recommendations.
+        </p>
+
+        <div style="margin-top:30px; display:flex; gap:20px;margin: o auto;">
+
+            <a href="{{ url_for('assessment') }}"
+               class="btn btn-primary">
+                Get Recommendation
+            </a>
+
+            <a href="{{ url_for('about') }}"
+               class="btn btn-outline">
+                Learn More
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container">
+  <h2 style="text-align: center; color: #1B4332; margin-bottom: 30px;">About Our System</h2>
+  <div class="grid-2">
+    <div class="card">
+      <div style="font-size: 40px;">📊</div>
+      <h3>Smart Analysis</h3>
+      <p>Advanced ML algorithms analyze your profile and predict the best internship domain.</p>
+    </div>
+    <div class="card">
+      <div style="font-size: 40px;">🎯</div>
+      <h3>Personalized Results</h3>
+      <p>Get domain recommendations that match your skills, interests, and academic background.</p>
+    </div>
+    <div class="card">
+      <div style="font-size: 40px;">📈</div>
+      <h3>Skill Improvement</h3>
+      <p>Identify your weak areas and get skill improvement suggestions with roadmap plans.</p>
+    </div>
+    <div class="card">
+      <div style="font-size: 40px;">🚀</div>
+      <h3>Career Growth</h3>
+      <p>Start your career journey with the right internship in the perfect domain for you.</p>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="text-align: center;">
+  <h2 style="color: #1B4332; margin-bottom: 20px;">Ready to Start Your Assessment?</h2>
+  <p>Complete a quick assessment and discover your recommended career path instantly.</p>
+  <div style="margin-top: 20px;">
+    <a href="{{ url_for('assessment') }}" class="btn btn-primary">Take Assessment Now</a>
+  </div>
+</div>
+{% endblock %}

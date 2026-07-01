@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Prediction - Internship Recommendation System{% endblock %}
+
+{% block content %}
+<div class="container">
+  
+  <!-- Recommended Domain -->
+  <div class="result-header">
+    <p style="font-size: 16px; margin: 0; text-transform: uppercase;">Your Top Recommendation</p>
+    <h1 style="font-size: 32px; margin: 10px 0;">🎯 {{ result.predicted_domain }}</h1>
+    <p style="font-size: 16px; margin: 0; opacity: 0.9;">Confidence Score: <strong>{{ result.confidence }}%</strong></p>
+  </div>
+
+  <div class="grid-2" style="margin-top: 30px;">
+    
+    <!-- Match confidence box -->
+    <div style="border: 1px solid #DDDDDD; padding: 20px; border-radius: 6px;">
+      <h3 style="color: #1B4332; margin-top: 0;">Match Score</h3>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" style="width: {{ result.confidence }}%;"></div>
+      </div>
+      <p>We are <strong>{{ result.confidence }}%</strong> confident that this is the best career domain matching your profile parameters.</p>
+    </div>
+
+    <!-- Career readiness box -->
+    <div style="border: 1px solid #DDDDDD; padding: 20px; border-radius: 6px;">
+      <h3 style="color: #1B4332; margin-top: 0;">Career Readiness</h3>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" style="width: {{ result.readiness_score }}%;"></div>
+      </div>
+      <p style="margin-bottom: 10px;">Readiness Score: <strong>{{ result.readiness_score }}%</strong></p>
+      
+      {% if result.readiness_category == 'Excellent' %}
+        <span class="badge badge-excellent">🌟 Excellent Readiness</span>
+      {% elif result.readiness_category == 'Good' %}
+        <span class="badge badge-good">👍 Good Readiness</span>
+      {% elif result.readiness_category == 'Average' %}
+        <span class="badge badge-average">📊 Average Readiness</span>
+      {% else %}
+        <span class="badge badge-need">💪 Need Improvement</span>
+      {% endif %}
+    </div>
+
+  </div>
+
+  <!-- Alternatives -->
+  <div style="margin-top: 30px; border: 1px solid #DDDDDD; padding: 20px; border-radius: 6px;">
+    <h3 style="color: #1B4332; margin-top: 0;">Top Alternative Careers</h3>
+    {% if result.top_careers %}
+      {% for career in result.top_careers %}
+        <div style="margin-bottom: 15px;">
+          <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 5px;">
+            <span>{{ career.domain }}</span>
+            <span>{{ career.confidence }}%</span>
+          </div>
+          <div class="progress-bar-bg" style="height: 10px;">
+            <div class="progress-bar-fill" style="width: {{ career.confidence }}%; background-color: #2D6A4F;"></div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <!-- Skill Gap Analysis -->
+  <div style="margin-top: 30px; border: 1px solid #DDDDDD; padding: 20px; border-radius: 6px;">
+    <h3 style="color: #1B4332; margin-top: 0;">🔍 Skill Gap Analysis</h3>
+    <p>We checked your ratings in core domains against minimum requirements. Improve these skills to boost your career prospects:</p>
+
+    {% if result.missing_skills %}
+      <div style="margin-top: 20px;">
+        {% for item in result.missing_skills %}
+          <div style="background-color: #F8D7DA; color: #842029; padding: 15px; border-radius: 6px; margin-bottom: 10px;">
+            <strong>⚠️ {{ item.skill }}</strong>: Your level is <strong>{{ item.current }}/10</strong>. 
+            We recommend reaching at least <strong>{{ item.required }}/10</strong> (Gap: +{{ item.gap }}).
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div style="background-color: #D4EDDA; color: #155724; padding: 15px; border-radius: 6px; text-align: center;">
+        🎉 Your skill levels meet the minimum requirements in all core areas. Keep it up!
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- CTA Buttons -->
+  <div style="text-align: center; margin-top: 40px; border-top: 1px solid #DDDDDD; padding-top: 30px; display: flex; justify-content: center; gap: 15px;">
+    <a href="{{ url_for('roadmap', domain=result.predicted_domain) }}" class="btn btn-primary">🗺️ View Learning Roadmap</a>
+    <a href="{{ url_for('assessment') }}" class="btn btn-outline">🔄 Retake Assessment</a>
+  </div>
+
+</div>
+{% endblock %}
